@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using SpeechLib;
+using UnityEngine.UI;
 
 public class TaxCalculator : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class TaxCalculator : MonoBehaviour
 
     // Variables
     bool textToSpeechEnabled = true;
+    public InputField grossSaleryInputField;
+    public Dropdown saleryPayPirodDropDown;
 
     private void Start()
     {
@@ -37,15 +40,37 @@ public class TaxCalculator : MonoBehaviour
     {
         // Get from user. E.g. input box
         // Validate the input (ensure it is a positive, valid number)
-        double grossYearlySalary = 1000;
+        double grossYearlySalary = double.Parse(grossSaleryInputField.text);
         return grossYearlySalary;
     }
 
     private string GetSalaryPayPeriod()
     {
         // Get from user. E.g. combobox or radio buttons
-        string salaryPayPeriod = "weekly";
-        return salaryPayPeriod;
+        if(saleryPayPirodDropDown.value == 0)
+        {
+            return "weekly";
+        }
+
+        else if (saleryPayPirodDropDown.value == 1)
+        {
+            return "fortnightly";
+        }
+
+        else if (saleryPayPirodDropDown.value == 2)
+        {
+            return "monthly";
+        }
+
+        else if (saleryPayPirodDropDown.value == 3)
+        {
+            return "quaterly";
+        }
+
+        else
+        {
+            return "semi annually";
+        }
     }
 
     private double CalculateGrossYearlySalary(double grossSalaryInput, string salaryPayPeriod)
