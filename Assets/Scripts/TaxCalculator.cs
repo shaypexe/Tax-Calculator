@@ -14,7 +14,7 @@ public class TaxCalculator : MonoBehaviour
     public Dropdown saleryPayPirodDropDown;
     public Text netIncome;
     public Text medicareLevy;
-    public Text incomeTaxPaid;
+    public Text incomeTax;
 
     private void Start()
     {
@@ -42,8 +42,6 @@ public class TaxCalculator : MonoBehaviour
 
     private double GetGrossSalary()
     {
-        // Get from user. E.g. input box
-        // Validate the input (ensure it is a positive, valid number)
         double grossYearlySalary = double.Parse(grossSaleryInputField.text);
         return grossYearlySalary;
     }
@@ -94,6 +92,9 @@ public class TaxCalculator : MonoBehaviour
         // "Medicare levy paid: $" + medicareLevyPaid.ToString("F2");
         // "Income tax paid: $" + incomeTaxPaid.ToString("F2");
         // "Net income: $" + netIncome.ToString("F2");
+        medicareLevy.text = "MedicareLevy Paid";
+        incomeTax.text = "Incomne tax Paid";
+        netIncome = "Net income";
     }
 
     // Text to Speech
