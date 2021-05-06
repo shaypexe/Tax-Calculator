@@ -463,7 +463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -0.5}
+  m_AnchoredPosition: {x: 12.5, y: -0.000024795532}
   m_SizeDelta: {x: -35, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446988366
@@ -498,7 +498,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Daily
+  m_Text: Weekly
 --- !u!222 &446988367
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1340,13 +1340,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Daily
+    - m_Text: Weekly
       m_Image: {fileID: 0}
     - m_Text: Fortnightly
       m_Image: {fileID: 0}
     - m_Text: Monthly
-      m_Image: {fileID: 0}
-    - m_Text: Quaterly
       m_Image: {fileID: 0}
     - m_Text: 'Semi Annually '
       m_Image: {fileID: 0}
@@ -1425,6 +1423,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grossSaleryInputField: {fileID: 464021194}
   saleryPayPirodDropDown: {fileID: 1108606707}
+  netIncome: {fileID: 0}
+  medicareLevy: {fileID: 0}
+  incomeTaxPaid: {fileID: 0}
 --- !u!114 &1151694038
 MonoBehaviour:
   m_ObjectHideFlags: 0
