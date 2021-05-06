@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using SpeechLib;
 using UnityEngine.UI;
+using SpeechLib;
+
 
 public class TaxCalculator : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class TaxCalculator : MonoBehaviour
     bool textToSpeechEnabled = true;
     public InputField grossSaleryInputField;
     public Dropdown saleryPayPirodDropDown;
+    public Text netIncome;
+    public Text medicareLevy;
+    public Text incomeTaxPaid;
 
     private void Start()
     {
@@ -46,61 +50,42 @@ public class TaxCalculator : MonoBehaviour
 
     private string GetSalaryPayPeriod()
     {
-        // Get from user. E.g. combobox or radio buttons
-        if(saleryPayPirodDropDown.value == 0)
         {
-            return "weekly";
-        }
-
-        else if (saleryPayPirodDropDown.value == 1)
-        {
-            return "fortnightly";
-        }
-
-        else if (saleryPayPirodDropDown.value == 2)
-        {
-            return "monthly";
-        }
-
-        else if (saleryPayPirodDropDown.value == 3)
-        {
-            return "quaterly";
-        }
-
-        else
-        {
-            return "semi annually";
+            if (saleryPayPirodDropDown.value == 0) return "weekly";
+            else if (saleryPayPirodDropDown.value == 1) return "fortnightly";
+            else if (saleryPayPirodDropDown.value == 2) return "monthly";
+            else if (saleryPayPirodDropDown.value == 3) return "quaterly";
+            else return "semi annually";
         }
     }
 
     private double CalculateGrossYearlySalary(double grossSalaryInput, string salaryPayPeriod)
     {
-        // This is a stub, replace with the real calculation and return the result
-        double grossYearlySalary = 50000;
-        return grossYearlySalary;
+        if (salaryPayPeriod == "weekly") return grossSalaryInput * 52;
+        else if (salaryPayPeriod == "fortnightly") return grossSalaryInput * 26;
+        else if (salaryPayPeriod == "monthly") return grossSalaryInput * 12;
+        else return grossSalaryInput;
     }
 
     private double CalculateNetIncome(double grossYearlySalary, ref double medicareLevyPaid, ref double incomeTaxPaid)
     {
-        // This is a stub, replace with the real calculation and return the result
-        medicareLevyPaid = CalculateMedicareLevy(grossYearlySalary);
-        incomeTaxPaid = CalculateIncomeTax(grossYearlySalary);
-        double netIncome = 33000;        
+        double netIncome = (grossYearlySalary - medicareLevyPaid - incomeTaxPaid);
         return netIncome;
     }
 
     private double CalculateMedicareLevy(double grossYearlySalary)
     {
-        // This is a stub, replace with the real calculation and return the result
-        double medicareLevyPaid = 2000;        
+        double medicareLevyPaid = (grossYearlySalary * MEDICARE_LEVY);        
         return medicareLevyPaid;
     }
 
     private double CalculateIncomeTax(double grossYearlySalary)
     {
-        // This is a stub, replace with the real calculation and return the result
-        double incomeTaxPaid = 15000;
-        return incomeTaxPaid;
+        if (grossYearlySalary <= 18200) return 0;
+        else if (grossYearlySalary <= 18001) return (grossYearlySalary - 37000) * 0.19;
+        else if (grossYearlySalary <= 37001) return (grossYearlySalary - 87000) * 0.325 + 3572;
+        else if (grossYearlySalary <= 87001) return (grossYearlySalary - 180000) * 0.37 + 19822;
+        else return (grossYearlySalary - 180000) * 0.45 + 54323;
     }
 
     private void OutputResults(double medicareLevyPaid, double incomeTaxPaid, double netIncome)
