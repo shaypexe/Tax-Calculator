@@ -12,7 +12,7 @@ public class TaxCalculator : MonoBehaviour
     bool textToSpeechEnabled = true;
     public InputField grossSaleryInputField;
     public Dropdown saleryPayPirodDropDown;
-    public Text netIncome;
+    public Text NetIncome;
     public Text medicareLevy;
     public Text incomeTax;
 
@@ -94,7 +94,7 @@ public class TaxCalculator : MonoBehaviour
         // "Net income: $" + netIncome.ToString("F2");
         medicareLevy.text = "MedicareLevy Paid";
         incomeTax.text = "Incomne tax Paid";
-        netIncome = "Net income";
+        NetIncome.text = "Net income";
     }
 
     // Text to Speech
