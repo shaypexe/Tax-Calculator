@@ -16,9 +16,10 @@ public class TaxCalculator : MonoBehaviour
     public Text medicareLevy;
     public Text incomeTax;
 
+    //Voice Speak
     private void Start()
     {
-        Speak("Welcome to the A.T.O. Tax Calculator");
+        Speak("Welcome to the offical Australian Tax Calculator");
     }
 
     // Run this function on the click event of your 'Calculate' button
@@ -40,12 +41,14 @@ public class TaxCalculator : MonoBehaviour
         OutputResults(medicareLevyPaid, incomeTaxPaid, netIncome);
     }
 
+    //Get The Gross Salary
     private double GetGrossSalary()
     {
         double grossYearlySalary = double.Parse(grossSaleryInputField.text);
         return grossYearlySalary;
     }
 
+    //Pirod of time pay
     private string GetSalaryPayPeriod()
     {
         {
@@ -57,6 +60,7 @@ public class TaxCalculator : MonoBehaviour
         }
     }
 
+    //Calulate Yearly Salary By Time Pirod
     private double CalculateGrossYearlySalary(double grossSalaryInput, string salaryPayPeriod)
     {
         if (salaryPayPeriod == "weekly") return grossSalaryInput * 52;
@@ -65,18 +69,21 @@ public class TaxCalculator : MonoBehaviour
         else return grossSalaryInput;
     }
 
+    //Get Net Income
     private double CalculateNetIncome(double grossYearlySalary, ref double medicareLevyPaid, ref double incomeTaxPaid)
     {
         double netIncome = (grossYearlySalary - medicareLevyPaid - incomeTaxPaid);
         return netIncome;
     }
 
+    //Get MedicareLevy Paid
     private double CalculateMedicareLevy(double grossYearlySalary)
     {
         double medicareLevyPaid = (grossYearlySalary * MEDICARE_LEVY);        
         return medicareLevyPaid;
     }
 
+    //Get Tax Paid
     private double CalculateIncomeTax(double grossYearlySalary)
     {
         if (grossYearlySalary <= 18200) return 0;
@@ -86,15 +93,16 @@ public class TaxCalculator : MonoBehaviour
         else return (grossYearlySalary - 180000) * 0.45 + 54323;
     }
 
+    //Outputing Reasults
     private void OutputResults(double medicareLevyPaid, double incomeTaxPaid, double netIncome)
     {
         // Output the following to the GUI
         // "Medicare levy paid: $" + medicareLevyPaid.ToString("F2");
         // "Income tax paid: $" + incomeTaxPaid.ToString("F2");
         // "Net income: $" + netIncome.ToString("F2");
-        medicareLevy.text = "MedicareLevy Paid";
-        incomeTax.text = "Incomne tax Paid";
-        NetIncome.text = "Net income";
+        medicareLevy.text = $"MedicareLevy Paid: ${medicareLevyPaid}";
+        incomeTax.text = $"Incomne tax Paid: ${incomeTaxPaid}";
+        NetIncome.text = $"Net income: ${netIncome}";
     }
 
     // Text to Speech
