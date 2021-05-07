@@ -44,53 +44,50 @@ public class TaxCalculator : MonoBehaviour
     //Get The Gross Salary
     private double GetGrossSalary()
     {
-        double grossYearlySalary = double.Parse(grossSaleryInputField.text);
-        return grossYearlySalary;
+        return double.Parse(grossSaleryInputField.text);
     }
 
     //Pirod of time pay
     private string GetSalaryPayPeriod()
     {
         {
-            if (saleryPayPirodDropDown.value == 0) return "weekly";
-            else if (saleryPayPirodDropDown.value == 1) return "fortnightly";
-            else if (saleryPayPirodDropDown.value == 2) return "monthly";
-            else if (saleryPayPirodDropDown.value == 3) return "quaterly";
-            else return "semi annually";
+            if (saleryPayPirodDropDown.value == 0) { return "weekly"; }
+            else if (saleryPayPirodDropDown.value == 1) { return "fortnightly"; }
+            else if (saleryPayPirodDropDown.value == 2) { return "monthly"; }
+            else if (saleryPayPirodDropDown.value == 3) { return "quaterly"; }
+            else { return "semi annually"; }
         }
     }
 
     //Calulate Yearly Salary By Time Pirod
     private double CalculateGrossYearlySalary(double grossSalaryInput, string salaryPayPeriod)
     {
-        if (salaryPayPeriod == "weekly") return grossSalaryInput * 52;
-        else if (salaryPayPeriod == "fortnightly") return grossSalaryInput * 26;
-        else if (salaryPayPeriod == "monthly") return grossSalaryInput * 12;
-        else return grossSalaryInput;
+        if (salaryPayPeriod == "weekly") { return grossSalaryInput * 52; }
+        else if (salaryPayPeriod == "fortnightly") { return grossSalaryInput * 26; }
+        else if (salaryPayPeriod == "monthly") { return grossSalaryInput * 12; }
+        else { return grossSalaryInput; }
     }
 
     //Get Net Income
     private double CalculateNetIncome(double grossYearlySalary, ref double medicareLevyPaid, ref double incomeTaxPaid)
     {
-        double netIncome = (grossYearlySalary - medicareLevyPaid - incomeTaxPaid);
-        return netIncome;
+        return (grossYearlySalary - medicareLevyPaid - incomeTaxPaid);
     }
 
     //Get MedicareLevy Paid
     private double CalculateMedicareLevy(double grossYearlySalary)
-    {
-        double medicareLevyPaid = (grossYearlySalary * MEDICARE_LEVY);        
-        return medicareLevyPaid;
+    {  
+        return grossYearlySalary * MEDICARE_LEVY;
     }
 
     //Get Tax Paid
     private double CalculateIncomeTax(double grossYearlySalary)
     {
-        if (grossYearlySalary <= 18200) return 0;
-        else if (grossYearlySalary <= 18001) return (grossYearlySalary - 37000) * 0.19;
-        else if (grossYearlySalary <= 37001) return (grossYearlySalary - 87000) * 0.325 + 3572;
-        else if (grossYearlySalary <= 87001) return (grossYearlySalary - 180000) * 0.37 + 19822;
-        else return (grossYearlySalary - 180000) * 0.45 + 54323;
+        if (grossYearlySalary <= 18200) { return 0; }
+        else if (grossYearlySalary <= 37000) { return (grossYearlySalary - 18200) * 0.19; }
+        else if (grossYearlySalary <= 87000) { return (grossYearlySalary - 37000) * 0.325 + 3572; }
+        else if (grossYearlySalary <= 180000) { return (grossYearlySalary - 87000) * 0.37 + 19822; }
+        else { return (grossYearlySalary - 180000) * 0.45 + 54323; }
     }
 
     //Outputing Reasults
@@ -100,9 +97,9 @@ public class TaxCalculator : MonoBehaviour
         // "Medicare levy paid: $" + medicareLevyPaid.ToString("F2");
         // "Income tax paid: $" + incomeTaxPaid.ToString("F2");
         // "Net income: $" + netIncome.ToString("F2");
-        medicareLevy.text = $"MedicareLevy Paid: ${medicareLevyPaid}";
-        incomeTax.text = $"Incomne tax Paid: ${incomeTaxPaid}";
-        NetIncome.text = $"Net income: ${netIncome}";
+        medicareLevy.text = $"{medicareLevyPaid}";
+        incomeTax.text = $"{incomeTaxPaid}";
+        NetIncome.text = $"{netIncome}";
     }
 
     // Text to Speech
